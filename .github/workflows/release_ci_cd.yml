@@ -1,9 +1,9 @@
 name: master CI_CD
 on: 
   push:
-    branches: [ "master"]
+    branches: [ "release"]
   pull_request:
-    branches: [ "master"]
+    branches: [ "release"]
 jobs:
   develop_ci_cd:
     runs-on: ubuntu-latest

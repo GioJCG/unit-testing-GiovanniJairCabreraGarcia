@@ -1,22 +1,41 @@
 import { Component } from '@angular/core';
 import { Stddev } from '../clases/stddev';
+import { Utilities } from '../clases/utilities';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stddev',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './stddev.component.html',
-  styleUrls: ['./stddev.component.css']
+  styleUrl: './stddev.component.css'
 })
-
 export class StddevComponent {
-  stddev = new Stddev();
+
+  stddev: Stddev;
+  util : Utilities;
+  imputString: string = '';
+  result: number | null = null;
 
   constructor() {
     this.stddev = new Stddev();
+    this.util = new Utilities();
   }
 
-  getStddev(dataList: string[], n: number): number {
-    return this.stddev.getStddev(dataList, n);
+  calculateStdDev(arrayString: string): number | null {
+    const array = this.getArray(arrayString);
+    if (array) {
+      this.result = this.getStddev(array);
+    }
+    return this.result;
+  }
+
+  getArray(arrayString: string): number[] | null {
+    return this.util.processArray(arrayString);
+  }
+
+  getStddev(array: number[]): number {
+    return this.stddev.calcularStddev(array);
   }
 }

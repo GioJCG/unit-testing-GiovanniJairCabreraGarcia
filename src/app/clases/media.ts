@@ -1,17 +1,6 @@
 export class Media {
-    getMedia(datalist: string[], n: number): number {
-      let media = 0;
-      let arrData: number[] = new Array(n);
-      for (let i = 0; i < n; i++) {
-        arrData[i] = parseFloat(datalist[i]);
-      }
-      
-      for (let j = 0; j < n; j++) {
-        media += arrData[j];
-      }
-  
-      media /= n;
-      media = parseFloat(media.toFixed(2)); 
-      return media;
-    }
+  calcularMedia(data: number[]): number {
+      const media = data.reduce((acc, val) => acc + val, 0) / data.length; 
+      return parseFloat(media.toFixed(2));
   }
+}
